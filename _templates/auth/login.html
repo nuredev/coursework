@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock head %}
+
+{% block body %}
+<article>
+    <form action="/auth/login" method="post">
+        {% csrf_token %}
+        <header>
+            <h1>Login</h1>
+            <span class="space"></span>
+            <span>or <a href="/auth/register" class="big">Register</a></span>
+        </header>
+        <section>
+            <div class="inputbox">
+                <input type="text" name="user_id" id="user_id" maxlength="16" placeholder=" ">
+                <label for="user_id">User ID:</label>
+            </div>
+            <div class="inputbox">
+                <input type="password" name="password" id="password" placeholder=" ">
+                <label for="password">Password:</label>
+            </div>
+            {% if error %}
+            <span class="error">
+                {% autoescape off %}
+                {{ error }}
+                {% endautoescape %}
+            </span>
+            {% endif %}
+            <div>
+                <span class="space"></span>
+                <a class="button red single" href="/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="eyecons">
+                        <path d="m12.293 13.707c0.39174 0.39174 1.0223 0.39174 1.4141 0s0.39174-1.0223 0-1.4141l-4.293-4.293 4.293-4.293c0.39174-0.39174 0.39174-1.0223 0-1.4141-0.39174-0.39174-1.0223-0.39174-1.4141 0l-4.293 4.293-4.293-4.293c-0.39174-0.39174-1.0223-0.39174-1.4141 0s-0.39174 1.0223 0 1.4141l4.293 4.293-4.293 4.293c-0.39174 0.39174-0.39174 1.0223 0 1.4141 0.39174 0.39174 1.0223 0.39174 1.4141 0l4.293-4.293z" />
+                    </svg>
+                </a>
+                <button class="button blue" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="eyecons">
+                        <path d="m13 3.5a1 1 0 0 0-0.70703 0.29297l-6.293 6.293-2.293-2.293a1 1 0 0 0-1.4141 0 1 1 0 0 0 0 1.4141l3.707 3.707 7.707-7.707a1 1 0 0 0 0-1.4141 1 1 0 0 0-0.70703-0.29297z" />
+                    </svg>
+                    <span>Login</span>
+                </button>
+            </div>
+        </section>
+    </form>
+</article>
+{% endblock body %}

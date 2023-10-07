@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script defer>
+    function updateCheckbox(checkbox) {
+        document.querySelector("#is_ascending").value = (checkbox.checked)? "1" : "0";
+    }
+    function updateCheckbox2(checkbox) {
+        document.querySelector("#is_solved").value = (checkbox.checked)? "1" : "0";
+    }
+</script>
+{% endblock head %}
+
+{% block body %}
+<form action="/search" method="post">
+    {% csrf_token %}
+    <article>
+        <header>
+            <h1>Search</h1>
+        </header>
+        <section>
+            <div class="inputbox">
+                <input type="query" name="query" id="query" placeholder=" ">
+                <label for="query">Search query:</label>
+            </div>
+            <div class="inputbox">
+                <select name="table" id="table">
+                    <option value="Question">Questions</option>
+                    <option value="Answer">Answers</option>
+                    <option value="User">Users</option>
+                    <option value="Topic">Topics</option>
+                </select>
+                <label for="table">Look for:</label>
+            </div>
+            
+            <hr>
+            <h2>Sorting:</h2>
+            <div class="inputbox">
+                <select name="sort" id="sort">
+                    <option value="relevance">Relevance</option>
+                    <option value="creation_date">Creation date</option>
+                </select>
+                <label for="sort">Sort by:</label>
+            </div>
+            <div>
+                <input type="hidden" name="is_ascending" id="is_ascending" value="0">
+                <input type="checkbox" name="is_ascending_check" id="is_ascending_check" onchange="updateCheckbox(this)">
+                <label for="is_ascending_check">Ascending</label>
+            </div>
+
+            <hr>
+            <h2>Filters:</h2>
+            <div class="inputbox">
+                <select name="topic" id="topic">
+                    <option value="*">-- Any --</option>
+                    {% for topic in topics %}
+                    <option value="{{ topic.topic_id }}">{{ topic.name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="topic">* Topic:</label>
+            </div>
+            <div>
+                <input type="hidden" name="is_solved" id="is_solved" value="0">
+                <input type="checkbox" name="is_solved_check" id="is_solved_check" placeholder=" " onchange="updateCheckbox2(this)">
+                <label for="is_solved_check">* Solved only</label>
+            </div>
+
+            <hr>
+            <div>
+                <span class="space"></span>
+                <button class="button blue" type="submit">
+                    Search
+                </button>
+            </div>
+        </section>
+        {% if search_results %}
+        <footer class="list" id="searchResults">
+            <h1>Search results:</h1>
+            {% for question in search_results %}
+            <a href="/question/{{ question.question_id }}">
+                <input type="checkbox" disabled {% if question.is_solved %}checked{% endif %}>
+                <div>
+                    <h1>{{ question.snippet }}</h1>
+                    <h2>{{ question.category }}</h2>
+                </div>
+                <span class="space"></span>
+                <div>
+                    <h1>{{ question.username }}</h1>
+                    <h1>{{ question.user_id }}</h1>
+                </div>
+                {{ question.creation_date }}
+            </a>
+            {% endfor %}
+        </footer>
+        {% endif %}
+    </article>
+</form>
+
+<article class="topic_list">
+    <header>
+        <h1>Topics</h1>
+    </header>
+    <section class="list">
+        {% for topic in topics %}
+        <a href="/browse/@{{topic.topic_id}}" class="topic_item">
+            <img src="{{ topic.picture }}" alt="" height="64">
+            <div>
+                <span>{{ topic.name }}</span>
+                <span>{{ topic.description }}</span>
+            </div>
+        </a>
+        {% endfor %}
+    </section>
+</article>
+
+{% for question in questions %}
+    {% autoescape off %}
+    {{ question }}
+    {% endautoescape %}
+{% endfor %}
+
+{% endblock body %}

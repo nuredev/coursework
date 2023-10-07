@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script defer>
+    function updateCheckbox(checkbox) {
+        document.querySelector("#is_ascending").value = (checkbox.checked)? "1" : "0";
+    }
+    function updateCheckbox2(checkbox) {
+        document.querySelector("#is_solved").value = (checkbox.checked)? "1" : "0";
+    }
+</script>
+{% endblock head %}
+
+{% block body %}
+<h1>Search results:</h1>
+<section class="form_data">
+    <form action="/search" method="post">
+    {% csrf_token %}
+    <article>
+        <section>
+            <div class="inputbox">
+                <input type="query" name="query" id="query" placeholder=" " value="{{ query }}">
+                <label for="query">Search query:</label>
+            </div>
+            <div class="inputbox">
+                <select name="table" id="table">
+                    <option {% if table == "Question" %}selected{% endif %} value="Question">Questions</option>
+                    <option {% if table == "Answer" %}selected{% endif %} value="Answer">Answers</option>
+                    <option {% if table == "User" %}selected{% endif %} value="User">Users</option>
+                    <option {% if table == "Topic" %}selected{% endif %} value="Topic">Topics</option>
+                </select>
+                <label for="table">Look for:</label>
+            </div>
+
+            <hr>
+            <h2>Sorting:</h2>
+            <div class="inputbox">
+                <select name="sort" id="sort">
+                    <option {% if sort == "relevance" %}selected{% endif %} value="relevance">Relevance</option>
+                    <option {% if sort == "creation_date" %}selected{% endif %} value="creation_date">Creation date</option>
+                </select>
+                <label for="sort">Sort by:</label>
+            </div>
+            <div>
+                <input type="hidden" name="is_ascending" id="is_ascending" value="{{ is_ascending }}">
+                <input type="checkbox" {% if is_ascending %}checked{% endif %} name="is_ascending_check" id="is_ascending_check" onchange="updateCheckbox(this)">
+                <label for="is_ascending_check">Ascending</label>
+            </div>
+
+            <hr>
+            <h2>Filters:</h2>
+            <div class="inputbox">
+                <select name="topic" id="topic">
+                    <option value="*">-- Any --</option>
+                    {% for topic in topics %}
+                    <option {% if filter_topic == topic.topic_id %}selected{% endif %} value="{{ topic.topic_id }}">{{ topic.name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="topic">* Topic:</label>
+            </div>
+            <div>
+                <input type="hidden" name="is_solved" id="is_solved" value="{{ filter_solved }}">
+                <input type="checkbox" {% if filter_solved %}checked{% endif %} name="is_solved_check" id="is_solved_check" placeholder=" " onchange="updateCheckbox2(this)">
+                <label for="is_solved_check">* Solved only</label>
+            </div>
+
+            <hr>
+            <div>
+                <span class="space"></span>
+                <button class="button blue" type="submit">
+                    Search
+                </button>
+            </div>
+        </section>
+        {% if search_results %}
+        <footer class="list" id="searchResults">
+            <h1>Search results:</h1>
+            {% for question in search_results %}
+            <a href="/question/{{ question.question_id }}">
+                <input type="checkbox" disabled {% if question.is_solved %}checked{% endif %}>
+                <div>
+                    <h1>{{ question.snippet }}</h1>
+                    <h2>{{ question.category }}</h2>
+                </div>
+                <span class="space"></span>
+                <div>
+                    <h1>{{ question.username }}</h1>
+                    <h1>{{ question.user_id }}</h1>
+                </div>
+                {{ question.creation_date }}
+            </a>
+            {% endfor %}
+        </footer>
+        {% endif %}
+    </article>
+</form>
+</section>
+<div style="display: flex; flex-direction: row;">
+    <a class="button blue" href="/browse">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="eyecons">
+            <path d="m10.708 3.7082c0.39174-0.39173 0.39174-1.0243 0-1.416-0.39174-0.39174-1.0243-0.39174-1.416 0l-5.7051 5.707 5.7051 5.707c0.39174 0.39174 1.0243 0.39174 1.416 0 0.39174-0.39173 0.39174-1.0243 0-1.416l-4.293-4.291z" />
+        </svg>
+        <span>Back</span>
+    </a>
+    <span class="space"></span>
+</div>
+<section class="search_results">
+    {% autoescape off %}
+    {{ results }}
+    {% endautoescape %}
+</section>
+{% endblock body %}

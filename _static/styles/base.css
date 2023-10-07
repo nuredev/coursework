@@ -1,0 +1,1254 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Poppins:wght@400;700&display=swap");
+#tableName, #sqlCommand, body, #sqlPrompt, .inputbox input,
+.inputbox textarea,
+.inputbox select, .button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  background-color: transparent;
+  color: inherit;
+  text-decoration: none;
+  font-style: normal;
+}
+
+.statBody > details > div strong, .statBody > details summary, .statHead, .search_results section footer, .search_results section header, .topic_list section a, .rating footer, .answer > footer section, .answer > footer form, .questionCard > header, #form > div, #userProfile > section, #userProfile header, #sqlWindow section, .flex, .answer .redaction a, .answer .redaction, .answer > footer form div, .answer > div > nav .rating div, .answer > div, .question > section footer, .question > nav .rating div, .question, #dialogForm form div, article section.row, article header, article section:not(.container) > div, body > header, .bar, .radiobox, .button, .infoPanel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statBody > details > div, .statBody > details, .statBody, .statHead .button div, .search_results section, .search_results, .topic_item div, .rating, .answer > div > header .profile, .answer > div > header, .question > header .profile, .question > header, .questionCard, .collection_item, #userProfile header div, #view_questions,
+#view_answers, .answer > footer form, .answer > footer, .answer > div > section div, .answer > div > section, .answer > div > nav .profile, .answer > div > nav .rating, .answer > div > nav, .answer, .matches a, .matches, .question > section, .question > nav .profile, .question > nav .rating, .question > nav, #dialogForm form, article section:not(.container), article, body > main, body, .inputbox, .infoPanel div {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.inputbox input,
+.inputbox textarea,
+.inputbox select, .button, .infoPanel {
+  transition: background-color 200ms;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+span.space {
+  margin: auto;
+}
+
+span.vl {
+  display: block;
+  height: 2rem;
+  min-width: 2px;
+  background-color: rgba(255, 255, 255, 0.16);
+}
+
+a:not(.button, .infoPanel) {
+  color: rgb(53, 132, 228);
+  text-decoration: none;
+}
+a:not(.button, .infoPanel):hover {
+  color: rgb(120, 174, 237);
+  text-decoration: underline;
+}
+
+.error {
+  text-align: center;
+  margin: 0 auto;
+  color: rgb(246, 97, 81);
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.infoPanel {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  padding: 0.25rem 1rem;
+}
+.infoPanel:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+}
+.infoPanel img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+}
+.infoPanel div {
+  gap: 0;
+}
+.infoPanel div span {
+  font-size: 0.75rem;
+  opacity: 0.5;
+  margin-top: -0.25rem;
+}
+
+.button {
+  cursor: pointer;
+  font-weight: bold;
+}
+.button svg {
+  width: 1em;
+  height: 1em;
+}
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+}
+.button.single {
+  padding: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  justify-content: center;
+}
+.button.yellow {
+  background-color: rgba(248, 228, 92, 0.16);
+  color: rgb(248, 228, 92);
+}
+.button.yellow:hover {
+  background-color: rgba(248, 228, 92, 0.32);
+}
+.button.red {
+  background-color: rgba(246, 97, 81, 0.16);
+  color: rgb(246, 97, 81);
+}
+.button.red:hover {
+  background-color: rgba(246, 97, 81, 0.32);
+}
+.button.green {
+  background-color: rgba(87, 227, 137, 0.16);
+  color: rgb(87, 227, 137);
+}
+.button.green:hover {
+  background-color: rgba(87, 227, 137, 0.32);
+}
+.button.blue {
+  background-color: rgba(120, 174, 237, 0.16);
+  color: rgb(120, 174, 237);
+}
+.button.blue:hover {
+  background-color: rgba(120, 174, 237, 0.32);
+}
+.button.orange {
+  background-color: rgba(255, 163, 72, 0.16);
+  color: rgb(255, 163, 72);
+}
+.button.orange:hover {
+  background-color: rgba(255, 163, 72, 0.32);
+}
+.button.purple {
+  background-color: rgba(192, 97, 203, 0.16);
+  color: rgb(192, 97, 203);
+}
+.button.purple:hover {
+  background-color: rgba(192, 97, 203, 0.32);
+}
+.button.joined.green {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgb(255, 255, 255);
+}
+.button.joined.green:hover {
+  background-color: rgba(143, 240, 164, 0.16);
+  color: rgb(143, 240, 164);
+}
+.button.joined.red {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgb(255, 255, 255);
+}
+.button.joined.red:hover {
+  background-color: rgba(246, 97, 81, 0.16);
+  color: rgb(246, 97, 81);
+}
+.button[disabled], .button:disabled {
+  pointer-events: none;
+  opacity: 0.2;
+}
+.button.focus {
+  opacity: 0.2;
+}
+
+.inputbox {
+  position: relative;
+  gap: 0;
+}
+.inputbox label {
+  transition: font-size 200ms, top 200ms;
+  position: absolute;
+  font-weight: bold;
+  opacity: 0.25;
+  left: 1rem;
+  font-size: 1rem;
+  top: 0.85rem;
+}
+.inputbox input,
+.inputbox textarea,
+.inputbox select {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 1.25rem 0.5rem 0.5rem 0.5rem;
+  width: 16rem;
+  flex-grow: 1;
+}
+.inputbox input:focus,
+.inputbox textarea:focus,
+.inputbox select:focus {
+  outline: 2px solid rgb(120, 174, 237);
+}
+.inputbox input:focus + label,
+.inputbox textarea:focus + label,
+.inputbox select:focus + label {
+  color: rgb(120, 174, 237);
+  opacity: 1;
+}
+.inputbox input:disabled,
+.inputbox textarea:disabled,
+.inputbox select:disabled {
+  opacity: 0.5;
+}
+.inputbox input:not(:-moz-placeholder-shown) + label, .inputbox textarea:not(:-moz-placeholder-shown) + label, .inputbox select:not(:-moz-placeholder-shown) + label {
+  font-size: 0.75rem;
+  top: 0.25rem;
+}
+.inputbox input:not(:-ms-input-placeholder) + label, .inputbox textarea:not(:-ms-input-placeholder) + label, .inputbox select:not(:-ms-input-placeholder) + label {
+  font-size: 0.75rem;
+  top: 0.25rem;
+}
+.inputbox input:focus + label,
+.inputbox textarea:focus + label,
+.inputbox select:focus + label,
+.inputbox input:not(:placeholder-shown) + label,
+.inputbox textarea:not(:placeholder-shown) + label,
+.inputbox select:not(:placeholder-shown) + label {
+  font-size: 0.75rem;
+  top: 0.25rem;
+}
+.inputbox:has(select) select {
+  background-color: #424242;
+}
+.inputbox:has(select) select:focus {
+  outline: 2px solid rgb(192, 97, 203);
+}
+.inputbox:has(select) select:focus + label {
+  color: rgb(192, 97, 203);
+  opacity: 1;
+}
+.inputbox.inputUserID input {
+  padding-left: 1.25rem;
+}
+.inputbox.inputUserID label {
+  padding-left: 0.66rem;
+}
+.inputbox.inputUserID:has(input:not(:-moz-placeholder-shown))::after {
+  content: "@";
+  font-weight: bold;
+  font-family: "JetBrains Mono", monospace;
+  display: block;
+  color: rgba(255, 255, 255, 0.32);
+  position: absolute;
+  top: 1.4rem;
+  left: 0.5rem;
+}
+.inputbox.inputUserID:has(input:not(:-ms-input-placeholder))::after {
+  content: "@";
+  font-weight: bold;
+  font-family: "JetBrains Mono", monospace;
+  display: block;
+  color: rgba(255, 255, 255, 0.32);
+  position: absolute;
+  top: 1.4rem;
+  left: 0.5rem;
+}
+.inputbox.inputUserID:has(:focus)::after, .inputbox.inputUserID:has(input:not(:placeholder-shown))::after {
+  content: "@";
+  font-weight: bold;
+  font-family: "JetBrains Mono", monospace;
+  display: block;
+  color: rgba(255, 255, 255, 0.32);
+  position: absolute;
+  top: 1.4rem;
+  left: 0.5rem;
+}
+
+.radiobox {
+  background-color: transparent;
+  transition: background-color 200ms;
+  position: relative;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  gap: 0;
+  margin: 0 auto;
+}
+.radiobox input {
+  width: 1px;
+  height: 1px;
+  margin-right: -1px;
+  opacity: 0;
+  position: absolute;
+}
+.radiobox label {
+  position: relative;
+}
+.radiobox label::after {
+  content: "";
+  display: block;
+  background-color: transparent;
+  width: 100%;
+  height: 2px;
+}
+.radiobox:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.radiobox:hover label::after {
+  background-color: rgb(153, 193, 241);
+}
+.radiobox input:checked + label::after {
+  background-color: rgb(153, 193, 241);
+}
+
+.bar {
+  flex-direction: row !important;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: rgba(248, 228, 92, 0.16) !important;
+  color: rgb(248, 228, 92);
+  outline: 1px solid rgb(248, 228, 92);
+}
+.bar.red {
+  background-color: rgba(237, 51, 59, 0.16) !important;
+  color: rgb(237, 51, 59);
+  outline: 1px solid rgb(237, 51, 59);
+}
+.bar.embed {
+  border-radius: 0 0 1rem 1rem;
+  border: 1px solid rgb(248, 228, 92);
+  outline: none;
+}
+
+a.big {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+#sqlPrompt {
+  font-family: "JetBrains Mono", monospace;
+  background-color: rgba(153, 193, 241, 0.08);
+  color: rgb(153, 193, 241);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+*,
+*::before,
+*::after {
+  font-family: "Poppins", "Roboto", -apple-system, BlinkMacSystemFont, "Noto", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+}
+
+svg {
+  min-width: 1rem;
+  min-height: 1rem;
+}
+
+img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+body {
+  background-color: rgb(30, 30, 30);
+  color: rgb(255, 255, 255);
+  gap: 3rem;
+}
+body > header {
+  background-color: rgb(129, 61, 156);
+  padding: 0.5rem;
+}
+body > main {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: calc(100vw - 4rem);
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+article {
+  border-radius: 1rem;
+  gap: 1px;
+  outline: 1px solid rgba(255, 255, 255, 0.32);
+}
+article:last-of-type {
+  margin-bottom: 2rem;
+}
+article > *:first-child {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+article > *:last-child {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+article h2 {
+  margin-left: 1rem;
+  margin-bottom: -0.5rem;
+  margin-top: -0.5rem;
+  font-size: 0.75rem;
+}
+article header,
+article section:not(.container),
+article footer {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  position: relative;
+}
+article section:not(.container) {
+  gap: 1rem;
+}
+article section:not(.container) > div {
+  gap: 1rem;
+}
+article header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+article section.container {
+  overflow-y: auto;
+  max-height: 60rem;
+  overflow-x: auto;
+}
+article section.row {
+  flex-direction: row !important;
+  gap: 1rem;
+  padding: 0;
+}
+article section.row .button.single {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0.5rem;
+}
+article table {
+  margin: 0 auto;
+  height: 100%;
+  border-collapse: collapse;
+  border: none;
+  background-color: transparent;
+}
+article table td {
+  padding: 0.25rem 0.5rem;
+  line-break: anywhere;
+  font-size: 1rem;
+  max-width: 20rem;
+}
+article table td:not(:last-of-type) {
+  border-right: 2px solid rgb(30, 30, 30);
+}
+article table td.null {
+  color: rgba(255, 255, 255, 0.32);
+}
+article table tr:not(:last-of-type) {
+  border-bottom: 2px solid rgb(30, 30, 30);
+}
+article table thead {
+  border-bottom: 2px solid rgb(30, 30, 30);
+}
+article table thead tr {
+  background-color: rgb(28, 113, 216);
+  font-weight: bold;
+  line-break: strict;
+  white-space: nowrap;
+}
+article table thead tr td svg {
+  margin: -2px 4px -2px 0;
+}
+article table tbody tr {
+  background-color: rgba(255, 255, 255, 0.04);
+  vertical-align: top;
+}
+article table tbody tr .button {
+  width: 2rem !important;
+  height: 2rem !important;
+}
+article table tbody tr img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.5rem;
+  outline: 1px solid rgb(255, 255, 255);
+}
+article table tbody tr td {
+  padding: 0.5rem 0.5rem 2px 0.5rem;
+}
+
+form {
+  width: 100%;
+  height: 100%;
+}
+
+em {
+  font-style: normal;
+  font-family: "JetBrains Mono", monospace;
+  color: rgba(255, 255, 255, 0.64);
+}
+
+#dialogForm {
+  display: flex;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
+}
+#dialogForm form {
+  padding: 1rem;
+  border-radius: 1rem;
+  gap: 1rem;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
+  background-color: rgb(30, 30, 30);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: auto;
+}
+#dialogForm form div {
+  gap: 1rem;
+}
+
+#tableWindow {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 60rem;
+  padding: 0;
+}
+
+.question {
+  align-items: stretch;
+  background-color: rgba(255, 255, 255, 0.08);
+  gap: 0;
+  position: relative;
+  min-width: 32rem;
+}
+.question > header {
+  flex-direction: column !important;
+}
+.question > nav {
+  align-items: center;
+  padding: 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.32);
+}
+.question > nav .rating {
+  align-items: center;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.question > nav .rating strong {
+  font-family: "JetBrains Mono", monospace;
+}
+.question > nav .rating div {
+  gap: 0;
+  z-index: 2;
+}
+.question > nav .rating div .button {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.question > nav .profile {
+  align-items: center;
+}
+.question > nav .profile img {
+  border-radius: 0.5rem;
+}
+.question > nav .profile h1 {
+  margin: 0;
+  font-size: 0.75rem;
+}
+.question > nav .profile a {
+  margin-top: -0.5rem;
+  font-size: 0.66rem;
+  z-index: 2;
+}
+.question > section {
+  background-color: rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+.question > section h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.question > section p {
+  margin: 0;
+  margin-top: -1rem;
+  font-size: 1rem;
+}
+.question > section footer {
+  background-color: transparent;
+  margin: -1rem;
+}
+.question > section footer img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+}
+.question > section footer span:last-child {
+  opacity: 0.4;
+}
+.question > section a {
+  color: rgb(255, 255, 255);
+}
+.question > a {
+  position: absolute;
+  display: block;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.matches > h1 {
+  font-size: 1rem;
+  margin: 0;
+}
+.matches h2 {
+  font-size: 0.75rem;
+  opacity: 0.3;
+  margin: 0;
+  margin-top: -0.75rem;
+}
+.matches a {
+  display: block;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: rgb(255, 255, 255);
+}
+.matches a h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.matches a div {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+.answer {
+  background-color: rgba(255, 255, 255, 0.08);
+  gap: 0;
+  position: relative;
+}
+.answer > div {
+  gap: 0;
+  align-items: stretch;
+}
+.answer > div > nav {
+  align-items: center;
+  padding: 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.32);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.answer > div > nav .rating {
+  align-items: center;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.answer > div > nav .rating strong {
+  font-family: "JetBrains Mono", monospace;
+}
+.answer > div > nav .rating div {
+  gap: 0;
+  z-index: 2;
+}
+.answer > div > nav .rating div .button {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.answer > div > nav .profile {
+  align-items: center;
+}
+.answer > div > nav .profile img {
+  border-radius: 0.5rem;
+}
+.answer > div > nav .profile h1 {
+  margin: 0;
+  font-size: 0.75rem;
+}
+.answer > div > nav .profile a {
+  margin-top: -0.5rem;
+  font-size: 0.66rem;
+  z-index: 2;
+}
+.answer > div > section {
+  background-color: rgba(255, 255, 255, 0.08);
+  width: 100%;
+  gap: 0;
+}
+.answer > div > section h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.answer > div > section h2 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  opacity: 0.32;
+  font-size: 1rem;
+  font-weight: normal;
+}
+.answer > div > section p {
+  margin: 0;
+  margin-top: -1rem;
+  font-size: 1rem;
+}
+.answer > div > section > span {
+  text-align: right;
+  opacity: 0.32;
+  font-size: 0.75rem;
+}
+.answer > div > section div {
+  border-top: 1px solid rgba(255, 255, 255, 0.32);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  text-align: left;
+  gap: 0;
+}
+.answer > div > section div strong {
+  color: rgb(87, 227, 137);
+}
+.answer > div > section div span {
+  font-size: 0.75rem;
+}
+.answer > footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.32);
+  background-color: rgba(220, 138, 221, 0.08);
+  gap: 1rem;
+}
+.answer > footer form {
+  gap: 1rem;
+}
+.answer > footer form div {
+  gap: 1rem;
+}
+.answer .redaction {
+  background-color: rgb(97, 53, 131);
+  border-radius: 0.5rem;
+}
+.answer .redaction a {
+  color: rgba(255, 255, 255, 0.64);
+}
+.answer .redaction a img {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.5rem;
+}
+.answer .redaction a::after {
+  content: ":";
+}
+.answer .redaction strong {
+  opacity: 0.32;
+  font-size: 0.75rem;
+  text-align: right;
+  margin-left: auto;
+}
+
+#sqlWindow section {
+  align-items: flex-start;
+}
+#sqlWindow section textarea {
+  width: 100%;
+  height: 2.5rem;
+}
+
+#view_questions,
+#view_answers {
+  background-color: transparent;
+}
+
+#userProfile header {
+  gap: 1rem;
+  align-items: stretch;
+}
+#userProfile header #userDescription {
+  width: 100%;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  padding: 0.5rem;
+}
+#userProfile header img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1rem;
+}
+#userProfile header div {
+  gap: 0;
+}
+#userProfile header div h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+#userProfile header div h2 {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.32;
+  font-weight: normal;
+  white-space: nowrap;
+}
+#userProfile > footer {
+  overflow-y: auto;
+  max-height: 40rem;
+}
+
+.collection_item {
+  gap: 0 !important;
+}
+.collection_item span {
+  color: 0.32;
+  text-align: right;
+  font-size: 0.75rem;
+}
+.collection_item h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+.collection_item h2 {
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+#sqlCommand {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  font-family: "JetBrains Mono", monospace;
+  min-width: 35rem;
+  outline: 1px solid rgba(255, 255, 255, 0.32);
+  font-weight: bold;
+  color: rgb(249, 240, 107);
+}
+
+#runCommand {
+  position: absolute;
+  right: -3rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  outline: 1px solid rgba(255, 255, 255, 0.32);
+}
+#runCommand:hover {
+  background-color: rgb(145, 65, 172);
+  outline: 1px solid rgb(220, 138, 221);
+}
+
+#tableName {
+  background-color: #454545;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  color: rgb(255, 255, 255);
+  grid-template-areas: "select";
+  align-items: center;
+}
+
+#form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-color: rgba(11, 11, 11, 0.32);
+  -webkit-backdrop-filter: blur(4rem);
+          backdrop-filter: blur(4rem);
+}
+#form > div {
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+#form article {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.questionCard {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  min-width: 40rem;
+  max-width: 60rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.questionCard > header {
+  background-color: transparent;
+  padding: 0;
+}
+.questionCard > header > strong {
+  color: rgb(120, 174, 237);
+}
+.questionCard > header > strong a {
+  color: rgb(120, 174, 237);
+}
+.questionCard > section {
+  display: inline-block !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin-top: 0.5rem;
+}
+.questionCard > section strong, .questionCard > section a {
+  font-size: 1.5rem;
+  margin: 0;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+.questionCard > section strong {
+  color: rgba(255, 255, 255, 0.16);
+  font-weight: normal;
+}
+.questionCard > footer {
+  padding: 0 !important;
+  background-color: transparent !important;
+}
+
+.ratingDisplay {
+  color: rgb(249, 240, 107);
+}
+.ratingDisplay span {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.question {
+  max-width: 60rem;
+}
+.question > header {
+  align-items: center !important;
+  border-radius: 1rem 0 0 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.32);
+}
+.question > header .profile {
+  align-items: center !important;
+  gap: 0;
+  max-width: 6rem;
+}
+.question > header .profile img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 0.5rem;
+}
+.question > header .profile strong {
+  margin-top: 0.5rem;
+  text-align: center;
+  line-height: 1rem;
+}
+.question > header .profile a {
+  font-size: 0.75rem;
+}
+.question > section {
+  border-radius: 0 1rem 1rem 0;
+  gap: 0 !important;
+}
+.question > section h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.question > section p {
+  margin: 0;
+}
+
+.answer {
+  max-width: 60rem;
+}
+.answer > div > header {
+  align-items: center !important;
+  border-radius: 1rem 0 0 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.32);
+}
+.answer > div > header .profile {
+  align-items: center !important;
+  gap: 0;
+  max-width: 6rem;
+}
+.answer > div > header .profile img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 0.5rem;
+}
+.answer > div > header .profile strong {
+  margin-top: 0.5rem;
+  text-align: center;
+  line-height: 1rem;
+}
+.answer > div > header .profile a {
+  font-size: 0.75rem;
+}
+.answer > div > section {
+  border-radius: 0 1rem 0 0;
+  gap: 0 !important;
+}
+.answer > div > section h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.answer > div > section p {
+  margin: 0;
+}
+.answer > footer {
+  align-items: stretch !important;
+  background-color: rgba(11, 11, 11, 0.08);
+  width: 100%;
+  padding: 1rem;
+}
+.answer > footer form {
+  flex-direction: row !important;
+  width: 100%;
+  gap: 1rem;
+}
+.answer > footer form .inputbox {
+  width: 100%;
+}
+.answer > footer form .button {
+  width: 3.6rem;
+  height: 3.3rem;
+}
+.answer > footer section {
+  flex-direction: row !important;
+  align-items: center !important;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  gap: 0.25rem;
+}
+.answer > footer section a {
+  opacity: 0.5;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  white-space: nowrap;
+}
+.answer > footer section strong {
+  margin-left: auto;
+  font-weight: normal;
+  font-size: 0.75rem;
+  opacity: 0.32;
+  line-height: 0.75rem;
+  height: 0.75rem;
+  white-space: nowrap;
+}
+
+.rating {
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+.rating header {
+  padding: 0;
+  background-color: transparent;
+}
+.rating footer {
+  gap: 0;
+  padding: 0;
+  background-color: transparent;
+  justify-content: center;
+}
+.rating footer .button:first-child {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.rating footer .button:last-child {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.rating footer .button {
+  background-color: transparent;
+  color: rgb(255, 255, 255);
+  width: 2rem;
+  height: 2rem;
+}
+.rating footer .button.red:hover {
+  color: rgb(246, 97, 81);
+}
+.rating footer .button.green:hover {
+  color: rgb(143, 240, 164);
+}
+
+.datetime {
+  font-size: 0.75rem;
+  line-height: 0.75rem;
+  opacity: 0.4;
+}
+
+.topic_list {
+  min-width: 30rem;
+}
+.topic_list section a {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  border-radius: 1rem;
+  gap: 1rem;
+}
+.topic_list section a img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.66rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+}
+.topic_list section a span {
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+hr {
+  width: 100%;
+  border: none;
+  min-height: 1px;
+  background-color: rgba(255, 255, 255, 0.32);
+  margin: 0;
+}
+
+.topic_item div span:last-child {
+  font-size: 0.75rem;
+  margin-top: -0.5rem;
+  color: rgba(255, 255, 255, 0.64);
+  font-weight: normal;
+}
+
+.search_results section {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.search_results section header {
+  gap: 1rem;
+}
+.search_results section header img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+}
+.search_results section header h1 {
+  margin: 0;
+}
+.search_results section header h1 a {
+  color: rgb(255, 255, 255);
+}
+.search_results section header span:last-child {
+  color: rgb(143, 240, 164);
+}
+.search_results section p {
+  margin: 0;
+}
+.search_results section footer {
+  font-size: 0.75rem;
+}
+
+.printable {
+  display: none;
+}
+
+.statHead {
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 50rem;
+}
+.statHead .button {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 1rem 2rem;
+  gap: 1rem;
+}
+.statHead .button svg {
+  width: 2rem;
+  height: 2rem;
+}
+.statHead .button div {
+  text-align: left;
+  gap: 0;
+}
+.statHead .button div h1, .statHead .button div span {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.statHead .button div span {
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+.statHead .button:hover {
+  background-color: rgb(28, 113, 216);
+}
+
+.statBody {
+  gap: 0.5rem;
+}
+.statBody > details {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 0 auto;
+  width: 50rem;
+}
+.statBody > details summary img {
+  border-radius: 1rem;
+}
+.statBody > details[open] summary {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.32);
+}
+.statBody > details > div {
+  gap: 0;
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  margin-top: 1rem;
+  outline: 1px solid rgba(255, 255, 255, 0.64);
+  font-size: 0.75rem;
+}
+.statBody > details > div a {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+}
+.statBody > details > div span {
+  max-height: 4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.statBody > details > div strong {
+  font-size: 0.75rem;
+  opacity: 0.25;
+  font-weight: normal;
+}
+.statBody > details hr {
+  min-height: 1px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.16);
+  margin-top: 1rem;
+}
+
+footer {
+    max-height: 40rem;
+    overflow-y: auto;
+}

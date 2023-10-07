@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock head %}
+
+{% block body %}
+
+<article>
+    <header>
+        <img src="{{ topic.picture }}" alt="" height="64">
+        <h1>{{ topic.name }}</h1>
+    </header>
+    <section>
+        <h2>Description:</h2>
+        <span>{{ topic.description }}</span>
+    </section>
+</article>
+
+<form action="/browse/@{{topic.topic_id}}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="forced" value="{% if matches %}1{% else %}0{% endif %}">
+    <article>
+        <header>
+            <h1>Ask a question</h1>
+        </header>
+        <section class="ask_box">
+            <div class="inputbox">
+                <input type="text" name="snippet" id="snippet" placeholder=" " value="{{ form.snippet }}">
+                <label for="snippet">Snippet:</label>
+            </div>
+            <div class="inputbox">
+                <textarea name="message_body" id="message_body" placeholder=" ">{{ form.message }}</textarea>
+                <label for="message_body">Detailed question:</label>
+            </div>
+            <div>
+                <span class="space"></span>
+                <button class="button blue" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="eyecons">
+                        <path d="m13 3.5a1 1 0 0 0-0.70703 0.29297l-6.293 6.293-2.293-2.293a1 1 0 0 0-1.4141 0 1 1 0 0 0 0 1.4141l3.707 3.707 7.707-7.707a1 1 0 0 0 0-1.4141 1 1 0 0 0-0.70703-0.29297z" />
+                    </svg>
+                    <span>Ask</span>
+                </button>
+            </div>
+        </section>
+        {% if matches %}
+        <footer class="matches">
+            {% autoescape off %}
+            {{ matches }}
+            {% endautoescape %}
+        </footer>
+        {% endif %}
+    </article>
+</form>
+
+<article>
+    <header>
+        <h1>Questions</h1>
+    </header>
+    <section>
+        {% for question in questions %}
+        <div class="questionCard">
+            <header>
+                <strong>By <a href="/user/@{{ question.user_id }}">@{{ question.user_id }}</a></strong>
+                <span class="space"></span>
+                <div class="ratingDisplay">
+                    <strong>{{ question.rating }}</strong>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
+                        <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z"/>
+                    </svg>
+                    <span>/ {{ question.ratings }} votes</span>
+                </div>
+                <span class="space"></span>
+                <span>{{ question.creation_date }}</span>
+            </header>
+            <section>
+                {% if question.is_solved == 1 %}
+                <strong>[SOLVED]</strong>
+                {% endif %}
+                <a href="/browse/question/{{ question.question_id }}">{{ question.snippet }}</a>
+            </section>
+            <footer>
+                {% autoescape off %}
+                {{ question.message_body }}
+                {% endautoescape %}
+            </footer>
+        </div>
+        {% endfor %}
+    </section>
+</article>
+
+{% endblock body %}

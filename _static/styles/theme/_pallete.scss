@@ -1,0 +1,57 @@
+@function clra ($color, $opacity) {
+    @return #{rgba($color, $opacity)};
+}
+
+$blue-1: rgb(153, 193, 241);
+$blue-2: rgb(120, 174, 237);
+$blue-3: rgb(53, 132, 228);
+$blue-4: rgb(28, 113, 216);
+$blue-5: rgb(26, 95, 180);
+
+$green-1: rgb(143, 240, 164);
+$green-2: rgb(87, 227, 137);
+$green-3: rgb(51, 209, 122);
+$green-4: rgb(46, 194, 126);
+$green-5: rgb(38, 162, 105);
+
+$yellow-1: rgb(249, 240, 107);
+$yellow-2: rgb(248, 228, 92);
+$yellow-3: rgb(246, 211, 45);
+$yellow-4: rgb(245, 194, 17);
+$yellow-5: rgb(229, 165, 10);
+
+$orange-1: rgb(255, 190, 111);
+$orange-2: rgb(255, 163, 72);
+$orange-3: rgb(255, 120, 0);
+$orange-4: rgb(230, 97, 0);
+$orange-5: rgb(198, 70, 0);
+
+$red-1: rgb(246, 97, 81);
+$red-2: rgb(237, 51, 59);
+$red-3: rgb(224, 27, 36);
+$red-4: rgb(192, 28, 40);
+$red-5: rgb(165, 29, 45);
+
+$purple-1: rgb(220, 138, 221);
+$purple-2: rgb(192, 97, 203);
+$purple-3: rgb(145, 65, 172);
+$purple-4: rgb(129, 61, 156);
+$purple-5: rgb(97, 53, 131);
+
+$brown-1: rgb(205, 171, 143);
+$brown-2: rgb(181, 131, 90);
+$brown-3: rgb(152, 106, 68);
+$brown-4: rgb(134, 94, 60);
+$brown-5: rgb(99, 69, 44);
+
+$light-1: rgb(255, 255, 255);
+$light-2: rgb(246, 245, 244);
+$light-3: rgb(222, 221, 218);
+$light-4: rgb(192, 191, 188);
+$light-5: rgb(154, 153, 150);
+
+$dark-1: rgb(11, 11, 11);
+$dark-2: rgb(30, 30, 30);
+$dark-3: rgb(36, 36, 36);
+$dark-4: rgb(48, 48, 48);
+$dark-5: rgb(56, 56, 56);

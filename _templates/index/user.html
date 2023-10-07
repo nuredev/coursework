@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script defer src="/static/scripts/user_profile.js"></script>
+{% endblock head %}
+
+{% block body %}
+<article id="userProfile">
+    <header>
+        <img src="{{ profile.picture }}" alt="">
+        <div>
+            <h1>{{ profile.username }}</h1>
+            <h2>{{ profile.user_id }}</h2>
+        </div>
+        <div id="userDescription">{{ profile.description }}</div>
+    </header>
+    <section>
+        <div id="userRating">
+            <strong>User rating:</strong>
+            {{ user_rating }} / {{ ratings }} votes
+        </div>
+        <div class="radiobox">
+            <input type="radio" name="tab" id="questions" onchange="if (this.checked) showTab(this)">
+            <label for="questions">Questions</label>
+        </div>
+        <div class="radiobox">
+            <input type="radio" name="tab" id="answers" onchange="if (this.checked) showTab(this)">
+            <label for="answers">Answers</label>
+        </div>
+    </section>
+    <footer>
+        <section id="view_questions">
+            {% for question in questions %}
+            <article class="question">
+                <header>
+                    <div class="profile">
+                        <img src="{{ question.user.picture }}" alt="">
+                        <strong>{{ question.user.username }}</strong>
+                        <a href="/user/@{{ question.user_id }}">@{{ question.user_id }}</a>
+                    </div>
+                    <span class="space"></span>
+                    <div class="rating">
+                        <header>
+                            <strong>{{ question.rating }}</strong>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
+                                <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z"/>
+                            </svg>
+                            <span>/ {{ question.ratings }} votes</span>
+                        </header>
+                        <footer>
+                            {% if user.user_id in question.rating_users_positive %}
+                            <button class="button single green focus" onclick="vote(this)" data-target="{{ question.rating_id }}/2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                </svg>
+                            </button>
+                            {% else %}
+                            <button class="button single green" onclick="vote(this)" data-target="{{ question.rating_id }}/1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                </svg>
+                            </button>
+                            {% endif %}
+                            {% if user.user_id in question.rating_users_negative %}
+                            <button class="button single red focus" onclick="vote(this)" data-target="{{ question.rating_id }}/2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                </svg>
+                            </button>
+                            {% else %}
+                            <button class="button single red" onclick="vote(this)" data-target="{{ question.rating_id }}/0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                </svg>
+                            </button>
+                            {% endif %}
+                        </footer>
+                    </div>
+                </header>
+                <section>
+                    <h1><a href="/browse/question/{{ question.question_id }}">{{ question.snippet }}</a></h1>
+                    <p>
+                        {% autoescape off %}
+                        {{ question.message_body }}
+                        {% endautoescape %}
+                    </p>
+                </section>
+            </article>
+            {% endfor %}
+        </section>
+        <section id="view_answers">
+            {% for answer in answers %}
+            <article class="question">
+                <header>
+                    <div class="profile">
+                        <img src="{{ answer.user.picture }}" alt="">
+                        <strong>{{ answer.user.username }}</strong>
+                        <a href="/user/@{{ answer.user_id }}">@{{ answer.user_id }}</a>
+                    </div>
+                    <span class="space"></span>
+                    <div class="rating">
+                        <header>
+                            <strong>{{ answer.rating }}</strong>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
+                                <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z"/>
+                            </svg>
+                            <span>/ {{ answer.ratings }} votes</span>
+                        </header>
+                        <footer>
+                            {% if user.user_id in answer.rating_users_positive %}
+                            <button class="button single green focus" onclick="vote(this)" data-target="{{ answer.rating_id }}/2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                </svg>
+                            </button>
+                            {% else %}
+                            <button class="button single green" onclick="vote(this)" data-target="{{ answer.rating_id }}/1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                </svg>
+                            </button>
+                            {% endif %}
+                            {% if user.user_id in answer.rating_users_negative %}
+                            <button class="button single red focus" onclick="vote(this)" data-target="{{ answer.rating_id }}/2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                </svg>
+                            </button>
+                            {% else %}
+                            <button class="button single red" onclick="vote(this)" data-target="{{ answer.rating_id }}/0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                </svg>
+                            </button>
+                            {% endif %}
+                        </footer>
+                    </div>
+                </header>
+                <section>
+                    <span class="datetime">{{ answer.creation_date }}</span>
+                    <h1>{{ answer.summary }}</h1>
+                    <p>
+                        {% autoescape off %}
+                        {{ answer.message_body }}
+                        {% endautoescape %}
+                    </p>
+                    {% if answer.resource_links %}
+                    <div>
+                        <strong>Resource links:</strong>
+                        <span>{{ answer.resource_links }}</span>
+                    </div>
+                    {% endif %}
+                </section>
+            </article>
+            {% endfor %}
+        </section>
+    </footer>
+</article>
+<div style="display: flex; flex-direction: row;">
+    <span class="space"></span>
+    <button class="button yellow" onclick="printUser()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="eyecons">
+            <path d="m14 4v8c0 1.662-1.338 3-3 3h-6c-1.662 0-3-1.338-3-3v-8c0-1.662 1.338-3 3-3 0-0.554 0.446-1 1-1h4c0.554 0 1 0.446 1 1 1.662 0 3 1.338 3 3zm-4 0h-4c-0.554 0-1-0.446-1-1-0.554 0-1 0.446-1 1v8c0 0.554 0.446 1 1 1h6c0.554 0 1-0.446 1-1v-8c0-0.554-0.446-1-1-1 0 0.554-0.446 1-1 1z" fill-rule="evenodd" />
+        </svg>
+        <span>Print</span>
+    </button>
+</div>
+<div class="printable">
+    <main style="font-family: Poppins, sans-serif;">
+        <header style="display: flex; flex-direction: row; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+            <img src="{{ profile.picture }}" alt="" width="64px" height="64px" style="object-fit: cover">
+            <div style="display: flex; flex-direction: column;">
+                <h1 style="margin: 0; font-weight: bold;">{{ profile.username }}</h1>
+                <h3 style="margin: 0; opacity: 0.5; font-weight: normal; margin-top: -0.5rem;">{{ profile.user_id }}</h3>
+            </div>
+        </header>
+        <hr>
+        <section>
+            <strong style="margin-right: 1rem;">Description: </strong> {{ profile.description }} <br>
+            <strong style="margin-right: 1rem;">Account created: </strong> {{ profile.creation_date }} <br>
+            <strong style="margin-right: 1rem;">Questions posted: </strong> {{ question_count }} <br>
+            <strong style="margin-right: 1rem;">Answers posted: </strong> {{ answer_count }} <br>
+            <strong style="margin-right: 1rem;">User rating score: </strong> {{ user_rating }} out of {{ ratings }} votes <br>
+        </section><hr>
+        <footer style="font-size: 0.75rem; text-align: right; margin-left: auto;">
+            <strong>Document generated on</strong> {{ now }}
+        </footer>
+    </main>
+</div>
+{% endblock body %}

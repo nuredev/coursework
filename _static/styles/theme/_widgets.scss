@@ -1,0 +1,334 @@
+span.space {
+    margin: auto;
+}
+
+span.vl {
+    display: block;
+    height: 2rem;
+    min-width: 2px;
+    background-color: clra($light-1, 0.16);
+}
+
+a:not(.button, .infoPanel) {
+    color: $blue-3;
+    text-decoration: none;
+
+    &:hover {
+        color: $blue-2;
+        text-decoration: underline;
+    }
+}
+
+.error {
+    text-align: center;
+    margin: 0 auto;
+    color: $red-1;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.infoPanel {
+    @extend %flex-row;
+    @extend %block;
+
+    color: $light-1;
+    text-decoration: none;
+    padding: 0.25rem 1rem;
+
+    &:hover {
+        background-color: clra($light-1, 0.16);
+    }
+
+    img {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.5rem;
+    }
+
+    div {
+        @extend %flex-column;
+        gap: 0;
+
+        span {
+            font-size: 0.75rem;
+            opacity: 0.5;
+            margin-top: -0.25rem;
+        }
+    }
+}
+
+.button {
+    @extend %reset;
+    @extend %block;
+    @extend %flex-row;
+    cursor: pointer;
+    font-weight: bold;
+
+    svg {
+        width: 1em;
+        height: 1em;
+    }
+
+    &:hover {
+        background-color: clra($light-1, 0.16);
+    }
+
+    &.single {
+        padding: 0;
+        width: 2.5rem;
+        height: 2.5rem;
+        justify-content: center;
+    }
+
+    &.yellow {
+        background-color: clra($yellow-2, 0.16);
+        color: $yellow-2;
+
+        &:hover {
+            background-color: clra($yellow-2, 0.32);
+        }
+    }
+
+    &.red {
+        background-color: clra($red-1, 0.16);
+        color: $red-1;
+
+        &:hover {
+            background-color: clra($red-1, 0.32);
+        }
+    }
+
+    &.green {
+        background-color: clra($green-2, 0.16);
+        color: $green-2;
+
+        &:hover {
+            background-color: clra($green-2, 0.32);
+        }
+    }
+
+    &.blue {
+        background-color: clra($blue-2, 0.16);
+        color: $blue-2;
+
+        &:hover {
+            background-color: clra($blue-2, 0.32);
+        }
+    }
+
+    &.orange {
+        background-color: clra($orange-2, 0.16);
+        color: $orange-2;
+
+        &:hover {
+            background-color: clra($orange-2, 0.32);
+        }
+    }
+
+    &.purple {
+        background-color: clra($purple-2, 0.16);
+        color: $purple-2;
+
+        &:hover {
+            background-color: clra($purple-2, 0.32);
+        }
+    }
+
+    &.joined.green {
+        background-color: clra($light-1, 0.08);
+        color: $light-1;
+        
+        &:hover {
+            background-color: clra($green-1, 0.16);
+            color: $green-1;
+        }
+    }
+
+    &.joined.red {
+        background-color: clra($light-1, 0.08);
+        color: $light-1;
+        
+        &:hover {
+            background-color: clra($red-1, 0.16);
+            color: $red-1;
+        }
+    }
+
+    &[disabled],
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.2;
+    }
+
+    &.focus {
+        opacity: 0.2;
+    }
+}
+.inputbox {
+    @extend %flex-column;
+    position: relative;
+    gap: 0;
+
+    label {
+        transition: font-size 200ms, top 200ms;
+        position: absolute;
+        font-weight: bold;
+        opacity: 0.25;
+        left: 1rem;
+        font-size: 1rem;
+        top: 0.85rem;
+    }
+    
+    input,
+    textarea,
+    select {
+        @extend %reset;
+        @extend %block;
+    
+        background-color: clra($light-1, 0.08);
+        padding: 1.25rem 0.5rem 0.5rem 0.5rem;
+        width: 16rem;
+        flex-grow: 1;
+
+        &:focus {
+            outline: 2px solid $blue-2;
+
+            & + label {
+                color: $blue-2;
+                opacity: 1;
+            }
+        }
+
+        &:disabled {
+            opacity: 0.5;
+        }
+    }
+
+    input:focus + label,
+    textarea:focus + label,
+    select:focus + label,
+    input:not(:placeholder-shown) + label,
+    textarea:not(:placeholder-shown) + label,
+    select:not(:placeholder-shown) + label {
+        font-size: 0.75rem;
+        top: 0.25rem;
+    }
+
+    &:has(select) {
+        select {
+            background-color: #424242;
+
+            &:focus {
+                outline: 2px solid $purple-2;
+    
+                & + label {
+                    color: $purple-2;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &.inputUserID {
+        input {
+            padding-left: 1.25rem;
+        }
+
+        label {
+            padding-left: 0.66rem;
+        }
+
+        &:has(:focus)::after,
+        &:has(input:not(:placeholder-shown))::after {
+            content: "@";
+            font-weight: bold;
+            font-family: 'JetBrains Mono', monospace;
+            display: block;
+            color: clra($light-1, 0.32);
+            position: absolute;
+            top: 1.4rem;
+            left: 0.5rem;
+        }
+    }
+}
+
+.radiobox {
+    @extend %flex-row;
+    background-color: transparent;
+    transition: background-color 200ms;
+    position: relative;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    gap: 0;
+    margin: 0 auto;
+
+    input {
+        width: 1px;
+        height: 1px;
+        margin-right: -1px;
+        opacity: 0;
+        position: absolute;
+    }
+
+    label {
+        position: relative;
+
+        &::after {
+            content: "";
+            display: block;
+            background-color: transparent;
+            width: 100%;
+            height: 2px;
+        }
+    }
+
+    &:hover {
+        background-color: clra($light-1, 0.08);
+
+        label::after {
+            background-color: $blue-1;
+        }
+    }
+
+    input:checked + label::after {
+        background-color: $blue-1;
+    }
+}
+
+.bar {
+    @extend %flex-row;
+    flex-direction: row !important;
+    gap: 0.5rem;
+
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: clra($yellow-2, 0.16) !important;
+    color: $yellow-2;
+    outline: 1px solid $yellow-2;
+
+    &.red {
+        background-color: clra($red-2, 0.16) !important;
+        color: $red-2;
+        outline: 1px solid $red-2;
+    }
+
+    &.embed {
+        border-radius: 0 0 1rem 1rem;
+        border: 1px solid $yellow-2;
+        outline: none;
+    }
+}
+
+a.big {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+#sqlPrompt {
+    @extend %reset;
+    font-family: 'JetBrains Mono', monospace;
+    background-color: clra($blue-1, 0.08);
+    color: $blue-1;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}

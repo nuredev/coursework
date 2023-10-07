@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock head %}
+
+{% block body %}
+<article>
+    <form action="/profile" method="post">
+        {% csrf_token %}
+        <header>
+            <h1>Your profile</h1>
+            <span class="space"></span>
+            <em>{{ user.user_id }}</em>
+        </header>
+        <section>
+                <div class="inputbox">
+                    <input type="text" name="username" id="username" maxlength="64" value="{{ user.username }}" placeholder=" ">
+                    <label for="username">Username:</label>
+                </div>
+                <div class="inputbox">
+                    <input type="text" name="picture" id="picture" maxlength="64" value="{{ user.picture }}" placeholder=" ">
+                    <label for="picture">Profile Picture:</label>
+                </div>
+                <div class="inputbox">
+                    <input type="text" name="description" id="description" maxlength="64" value="{{ user.description }}" placeholder=" ">
+                    <label for="description">Description:</label>
+                </div>
+                <div class="inputbox">
+                    <input type="password" name="password" id="password" value="" placeholder=" ">
+                    <label for="password">New Password:</label>
+                </div>
+                <div class="inputbox">
+                    <input type="password" name="confirm_password" id="confirm_password" value="" placeholder=" ">
+                    <label for="confirm_password">Confirm Password:</label>
+                </div>
+                {% if error %}
+                <span class="error">
+                    {% autoescape off %}
+                    {{ error }}
+                    {% endautoescape %}
+                </span>
+                {% endif %}
+                <div>
+                    <span class="space"></span>
+                    <button class="button purple" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="eyecons">
+                            <path d="m13 3.5a1 1 0 0 0-0.70703 0.29297l-6.293 6.293-2.293-2.293a1 1 0 0 0-1.4141 0 1 1 0 0 0 0 1.4141l3.707 3.707 7.707-7.707a1 1 0 0 0 0-1.4141 1 1 0 0 0-0.70703-0.29297z" />
+                        </svg>
+                        <span>Update</span>
+                    </button>
+                </div>
+        </section>
+    </form>
+</article>
+{% endblock body %}
